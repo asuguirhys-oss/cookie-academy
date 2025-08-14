@@ -1,129 +1,436 @@
-const lessons = [
-    { title: "Boolean Operators", img: "https://file.garden/Z6dDZnlsF39IcGo1/KABANATA%2039-40.png", desc: "Learn how to use Boolean operators effectively.", link: "boolean-operators.html" },
-    { title: "Web Design Principles", img: "https://file.garden/Z6dDZnlsF39IcGo1/KABANATA%2039-40%20(6).png", desc: "Discover different what it takes to make your website perfect!", link: "#" },
-    { title: "Online Tools", img: "https://file.garden/Z6dDZnlsF39IcGo1/6.png", desc: "Understand different productivity tools easily!.", link: "#" },
-    { title: "Netiquette and Guidelines", img: "https://file.garden/Z6dDZnlsF39IcGo1/KABANATA%2039-40%20(3).png", desc: "Explore Netiquette Guidelines.", link: "#" },
-    { title: "Web Evolution", img: "https://file.garden/Z6dDZnlsF39IcGo1/8.png", desc: "Wonder how web evolve? What are the fundamentals before? Click me.", link: "" }
-];
-
-const tests = [
-    { title: "Boolean Operators", img: "https://file.garden/Z6dDZnlsF39IcGo1/KABANATA%2039-40%20(1).png", desc: "Test your Boolean search skills.", link: "boolean-operators-test.html" },
-    { title: "Web Design Principles", img: "https://file.garden/Z6dDZnlsF39IcGo1/KABANATA%2039-40%20(7).png", desc: "Can you ace this cookie quiz?", link: "web-design-test.html" },
-    { title: "Online Tools", img: "https://file.garden/Z6dDZnlsF39IcGo1/7.png", desc: "Show off your decoration skills.", link: "online-tools-test.html" },
-    { title: "Netiquette and Guidelines", img: "https://file.garden/Z6dDZnlsF39IcGo1/KABANATA%2039-40%20(4).png", desc: "Prove your skills in web structure and style.", link: "netiquette-guidelines-test.html" },
-    { title: "Web Evolution", img: "https://file.garden/Z6dDZnlsF39IcGo1/8.png", desc: "Challenge your coding logic abilities.", link: "web-evo-test.html" }
-];
-function showSection(section) {
-    const content = document.getElementById('content');
-    content.innerHTML = '';
-    let data = section === 'lessons' ? lessons : tests;
-
-    data.forEach(item => {
-        // Set backText based on title or section
-        let backText = '';
-        if (section === 'lessons') {
-            switch (item.title) {
-                case "Boolean Operators":
-                    backText = "Logical words (like AND, OR, NOT) used in searching and programming to combine or limit results.";
-                    break;
-                case "Web Design Principles":
-                    backText = "Guidelines for creating effective, user-friendly, and visually appealing websites, focusing on layout, color, typography, and usability.";
-                    break;
-                case "Online Tools":
-                    backText = "Software or applications accessible via the internet to perform tasks such as design, collaboration, or data analysis.";
-                    break;
-                case "Netiquette and Guidelines":
-                    backText = "Rules and good manners for respectful and effective online communication.";
-                    break;
-                case "Web Evolution":
-                    backText = "The development of the internet from static Web 1.0 pages to interactive Web 2.0 platforms and immersive Web 3.0 experiences.";
-                    break;
-                default:
-                    backText = "Start learning this lesson!";
-            }
-        } else {
-            // Section is 'tests'
-            switch (item.title) {
-                case "Boolean Operators":
-                    backText = "Test your knowledge of Boolean logic.";
-                    break;
-                case "Web Design Principles":
-                    backText = "Can you design the perfect web page?";
-                    break;
-                case "Online Tools":
-                    backText = "Show what you know about dev tools.";
-                    break;
-                case "Netiquette and Guidelines":
-                    backText = "Time to test your digital manners.";
-                    break;
-                case "Web Evolution":
-                    backText = "How well do you know web history?";
-                    break;
-                default:
-                    backText = "Ready for the quiz?";
-            }
-        }
-
-        // Build the card
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.innerHTML = `
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="${item.img}" alt="${item.title}">
-                    <h3>${item.title}</h3>
-                    <p>${item.desc}</p>
-                </div>
-                <div class="card-back">
-                    <h3>${item.title}</h3>
-                    <p>${backText}</p>
-                    <button onclick="window.location.href='${item.link}'">Open</button>
-                </div>
-            </div>
-        `;
-        content.appendChild(card);
-    });
+body { 
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fff8f0;
+    color: #4b2e19;
+    overflow-x: hidden;
+    animation: fadeInPage 1s ease-in-out;
 }
 
-// Show lessons by default
-showSection('lessons');
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-}
-    // Save avatar selection to localStorage and update display
-function saveAvatar(avatar) {
-  localStorage.setItem("cookieAvatar", avatar);
-  document.getElementById("avatar-display").textContent = avatar;
+/* Fade-in animation on page load */
+@keyframes fadeInPage {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-// When page loads, update avatar display and dropdown selection
-window.addEventListener("DOMContentLoaded", () => {
-  // Get saved user name or default
-  const name = localStorage.getItem("userName") || "Cookie Champ";
-  document.getElementById("userNameDisplay").textContent = name;
+/* 🍪 Background Pattern */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://file.garden/Z6dDZnlsF39IcGo1/cookie.jpg');
+    background-size: 150px;
+    opacity: 0.15;
+    z-index: -2;
+}
 
-  // Get saved avatar or default
-  const avatar = localStorage.getItem("cookieAvatar") || "🍪";
-  document.getElementById("avatar-display").textContent = avatar;
+/* 🍪 Floating Cookies Animation */
+.cookie {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    background-image: url('https://cookieclicker.wiki.gg/images/thumb/5/5a/PerfectCookie.png/210px-PerfectCookie.png');
+    background-size: cover;
+    animation: floatCookies 20s linear infinite;
+    z-index: -1;
+    opacity: 0.4;
+}
 
-  // Set dropdown to saved avatar value
-  const select = document.getElementById("avatar-select");
-  select.value = avatar;
-});
+@keyframes floatCookies {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.5; }
+    100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
+}
 
-const profileBtn = document.getElementById('profileBtn');
-const dropdown = document.getElementById('profileDropdown');
+/* 🌈 Animated Gradient Header */
+header {
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    background: linear-gradient(270deg, #d2691e, #a0522d, #d2691e);
+    background-size: 600% 600%;
+    animation: gradientShift 8s ease infinite;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-profileBtn.addEventListener('click', () => {
-  const isExpanded = profileBtn.getAttribute('aria-expanded') === 'true';
-  profileBtn.setAttribute('aria-expanded', !isExpanded);
-  dropdown.hidden = isExpanded;
-});
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    background-color: #f4d9b3;
+    padding: 0.5rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
 
-// Close dropdown if clicking outside
-document.addEventListener('click', (e) => {
-  if (!profileBtn.contains(e.target) && !dropdown.contains(e.target)) {
-    profileBtn.setAttribute('aria-expanded', false);
-    dropdown.hidden = true;
+/* 🌟 Glowing Buttons */
+nav button, .card button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background-color: #8b4513;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+nav button:hover, .card button:hover {
+    background-color: #a0522d;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(210,105,30,0.6);
+}
+
+main {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* 🎯 Tilt Card Hover */
+.card {
+    background-color: rgba(255, 245, 225, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 250px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px) rotate(-1deg) scale(1.03);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #f4d9b3;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+.wave-divider {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+.wave-divider svg {
+    display: block;
+    width: 100%;
+    height: 80px;
+}
+
+/* Flip card container */
+.flip-card {
+    perspective: 1000px; /* Enables 3D flip effect */
+}
+
+/* Inner wrapper for front/back */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+/* Flip on hover */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front and back sides */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hides back when not facing viewer */
+    border-radius: 15px;
+}
+
+/* Front styling */
+.flip-card-front {
+    background-color: rgba(255, 245, 225, 0.95);
+}
+
+/* Back styling */
+.flip-card-back {
+    background-color: #f4d9b3;
+    color: #4b2e19;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+.card {
+    width: 250px;
+    height: 350px;
+    perspective: 1000px; /* Needed for 3D flip */
+    margin: 15px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 10px;
+    text-align: center;
+}
+
+.card-front img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#darkModeToggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background-color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 30px;
+    font-size: 18px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 999;
+}
+
+#darkModeToggle:hover {
+    background-color: #f0f0f0;
+}
+
+body.dark-mode {
+    background-color: #2b2b2b;
+    color: #ffffff;
+}
+
+.dark-mode .card {
+    background-color: #3a3a3a;
+    color: #fff;
+    border-color: #555;
+}
+
+.dark-mode .card-back button {
+    background-color: #d2845c;
+    color: #fff;
+}
+#search {
+    margin: 20px auto;
+    display: block;
+    padding: 10px;
+    width: 250px;
+    font-size: 16px;
+    border: 2px solid #aaa;
+    border-radius: 8px;
   }
-});
+  #avatar-select {
+    font-size: 16px;
+    padding: 6px;
+    border-radius: 6px;
+    margin-top: 8px;
+  }
+  
+  #avatar-display {
+    font-size: 2rem;
+    margin-right: 8px;
+  }
+  .header-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  #profileBtn {
+    background: transparent;
+    border: none;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    user-select: none;
+  }
+  
+  .arrow {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+  }
+  
+  #profileBtn[aria-expanded="true"] .arrow {
+    transform: rotate(180deg);
+  }
+  
+  .dropdown-content {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: #fff3e0;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(210, 140, 70, 0.3);
+    padding: 20px 15px;
+    width: 230px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #b46300;
+    z-index: 100;
+    user-select: none;
+  }
+  
+  .avatar-circle {
+    font-size: 3rem;
+    width: 70px;
+    height: 70px;
+    background: #f6d8a3;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 12px 3px #f9b54c;
+    transition: transform 0.3s ease;
+  }
+  
+  .avatar-circle:hover {
+    transform: scale(1.1);
+  }
+  .header-container {
+    position: relative;
+    background-color: #d2691e;
+    color: white;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .header-main {
+    z-index: 1;
+  }
+  
+  .header-main h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 900;
+  }
+  
+  .header-main p {
+    margin: 0.3rem 0 0 0;
+    font-size: 1rem;
+  }
+  
+  .header-welcome {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    z-index: 1;
+  }
+  
+  /* Certificate Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+  
+  .modal-content.certificate {
+    background: #fff8f0;
+    border: 5px solid #d2691e;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #d2691e;
+    max-width: 500px;
+    margin: 5% auto;
+    padding: 2rem;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: #4b2e19;
+    position: relative;
+  }
+  
+  .modal-content.certificate h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    color: #a0522d;
+  }
+  
+  .modal-content.certificate h3 {
+    margin: 0.5rem 0;
+    font-weight: 700;
+  }
+  
+  .modal-content.certificate p {
+    font-size: 1.1rem;
+    margin: 0.3rem 0;
+  }
+  
+  .modal-content.certificate button {
+    margin: 1rem 0.5rem 0 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    border: none;
+    background-color: #d2691e;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 10px #d2691e;
+    transition: background-color 0.3s ease;
+  }
+  
+  .modal-content.certificate button:hover {
+    background-color: #a0522d;
+  }
+
+  
