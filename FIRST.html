@@ -1,14 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Cookie Academy</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css" />
 <script defer src="script.js"></script>
+<style>
+  header {
+    background:#b55a1f; 
+    color:#fff; 
+    padding:12px 20px; 
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .site-title {
+    max-width: 65%;
+  }
+  .site-title h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  .site-title p {
+    margin: 4px 0 0 0;
+    font-size: 0.9rem;
+  }
+  .top-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #fff;
+    font-weight: 600;
+  }
+  #darkModeToggle {
+    background:none; 
+    border:none; 
+    cursor:pointer; 
+    font-size:1.2rem; 
+    color:#fff;
+  }
+  #avatar-select {
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  #avatar-display {
+    font-size: 1.6rem;
+    margin-left: 8px;
+  }
+</style>
 </head>
 <body>
-    <button id="darkModeToggle" onclick="toggleDarkMode()">🌙</button>
+
+
+    <header class="header-container">
+        <div class="header-main">
+          <h1>🍪 <strong>Cookie Academy</strong> 🍪</h1>
+          <p>Learn, bake, and hone your skills — test your knowledge one sweet bite at a time!</p>
+        </div>
+      
+        <div class="header-welcome">
+          🌙 Welcome, <strong>Alyssa Denisse M. Pasuquin!</strong> 🎂
+        </div>
+      </header>
+
 
 <!-- Floating Cookies -->
 <div class="cookie" style="left:10%; animation-delay:0s;"></div>
@@ -17,18 +76,27 @@
 <div class="cookie" style="left:70%; animation-delay:15s;"></div>
 <div class="cookie" style="left:90%; animation-delay:7s;"></div>
 
-<header>
-    <h1>🍪 Cookie Academy 🍪</h1>
-    <p>Learn, bake, and hone your skills — test your knowledge one sweet bite at a time!</p>
-</header>
-    
 <nav>
-    <button onclick="showSection('lessons')">Lessons</button>
-    <button onclick="showSection('tests')">Practice Tests</button>
+  <button onclick="showSection('lessons')">Lessons</button>
+  <button onclick="showSection('tests')">Practice Tests</button>
 </nav>
 
 <main id="content"></main>
 
-  
+<script>
+  const avatarDisplay = document.getElementById('avatar-display');
+  const avatarSelect = document.getElementById('avatar-select');
+
+  function saveAvatar(value) {
+    avatarDisplay.textContent = value;
+    // Save to localStorage if you want persistence
+    // localStorage.setItem('selectedAvatar', value);
+  }
+
+  // Initialize avatar display with current select value
+  saveAvatar(avatarSelect.value);
+
+</script>
+
 </body>
 </html>
