@@ -87,24 +87,29 @@
 <body>
 
 <header class="header-container">
-    <div class="header-welcome">
-        🌙 Welcome, <strong id="welcomeName">Guest</strong> 🎂
-      </div>
-      
-      <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const welcomeName = document.getElementById('welcomeName');
-        const storedName = localStorage.getItem('userName');
-      
-        if (storedName && storedName.trim() !== '') {
-          welcomeName.textContent = storedName;
-        } else {
-          welcomeName.textContent = 'Guest';
-        }
-      
-        // Your other existing DOMContentLoaded code below...
-      });
-      </script>
+  <div class="header-main">
+    <h1>🍪 <strong>Cookie Academy</strong> 🍪</h1>
+    <p>Learn, bake, and hone your skills — test your knowledge one sweet bite at a time!</p>
+  </div>
+
+  <div class="header-welcome">
+    🌙 Welcome, <strong id="welcomeName">Guest</strong> 🎂
+  </div>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const welcomeName = document.getElementById('welcomeName');
+    const storedName = localStorage.getItem('userName');
+  
+    if (storedName && storedName.trim() !== '') {
+      welcomeName.textContent = storedName;
+    } else {
+      welcomeName.textContent = 'Guest';
+    }
+  
+    // Your other existing DOMContentLoaded code below...
+  });
+  </script>
 </header>
 
 <!-- Floating Cookies -->
@@ -121,20 +126,19 @@
 
 <main id="content"></main>
 
-<!-- Certificate Modal -->
 <div id="certificateModal" class="modal">
-  <div class="modal-content certificate">
-    <h2>🍪 Certificate of Achievement 🍪</h2>
-    <p>This certifies that</p>
-    <h3 id="certName">[User Name]</h3>
-    <p>has completed the</p>
-    <h3 id="certCourse">[Course Name]</h3>
-    <p>Earned on <span id="certDate"></span></p>
-    <button id="downloadCertBtn">Download Certificate</button>
-    <button id="closeCertBtn">Close</button>
+    <div class="modal-content certificate">
+      <h2>🍪 Certificate of Achievement 🍪</h2>
+      <p>This certifies that</p>
+      <h3 id="certName">[User Name]</h3>
+      <p>has completed the</p>
+      <h3 id="certCourse">[Course Name]</h3>
+      <h3 id="certScore" style="margin: 10px 0; color: #b55a1f;"></h3>  <!-- ADDED -->
+      <p>Earned on <span id="certDate"></span></p>
+      <button id="downloadCertBtn">Download Certificate</button>
+      <button id="closeCertBtn">Close</button>
+    </div>
   </div>
-</div>
-
 <!-- Load html2canvas properly -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
