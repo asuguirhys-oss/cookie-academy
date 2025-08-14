@@ -7,67 +7,53 @@
 <link rel="stylesheet" href="style.css" />
 <script defer src="script.js"></script>
 <style>
-  header {
-    background:#b55a1f; 
-    color:#fff; 
-    padding:12px 20px; 
-    display:flex; 
-    justify-content:space-between; 
-    align-items:center; 
+  /* Your existing styles here... */
+  /* ... */
+
+  /* Modal styling */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+  .modal-content.certificate {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-  .site-title {
-    max-width: 65%;
-  }
-  .site-title h1 {
-    margin: 0;
-    font-size: 1.5rem;
-  }
-  .site-title p {
-    margin: 4px 0 0 0;
-    font-size: 0.9rem;
-  }
-  .top-controls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    color: #fff;
-    font-weight: 600;
-  }
-  #darkModeToggle {
-    background:none; 
-    border:none; 
-    cursor:pointer; 
-    font-size:1.2rem; 
-    color:#fff;
-  }
-  #avatar-select {
-    padding: 4px 8px;
-    border-radius: 6px;
-    border: none;
+  .modal-content button {
+    margin: 10px 5px 0 5px;
+    padding: 8px 15px;
     font-size: 1rem;
     cursor: pointer;
-  }
-  #avatar-display {
-    font-size: 1.6rem;
-    margin-left: 8px;
+    border-radius: 6px;
+    border: none;
+    background-color: #b55a1f;
+    color: white;
   }
 </style>
 </head>
 <body>
 
+<header class="header-container">
+  <div class="header-main">
+    <h1>🍪 <strong>Cookie Academy</strong> 🍪</h1>
+    <p>Learn, bake, and hone your skills — test your knowledge one sweet bite at a time!</p>
+  </div>
 
-    <header class="header-container">
-        <div class="header-main">
-          <h1>🍪 <strong>Cookie Academy</strong> 🍪</h1>
-          <p>Learn, bake, and hone your skills — test your knowledge one sweet bite at a time!</p>
-        </div>
-      
-        <div class="header-welcome">
-          🌙 Welcome, <strong>Alyssa Denisse M. Pasuquin!</strong> 🎂
-        </div>
-      </header>
-
+  <div class="header-welcome">
+    🌙 Welcome, <strong>Alyssa Denisse M. Pasuquin!</strong> 🎂
+  </div>
+</header>
 
 <!-- Floating Cookies -->
 <div class="cookie" style="left:10%; animation-delay:0s;"></div>
@@ -83,20 +69,25 @@
 
 <main id="content"></main>
 
-<script>
-  const avatarDisplay = document.getElementById('avatar-display');
-  const avatarSelect = document.getElementById('avatar-select');
+<!-- Certificate Modal -->
+<div id="certificateModal" class="modal">
+  <div class="modal-content certificate">
+    <h2>🍪 Certificate of Achievement 🍪</h2>
+    <p>This certifies that</p>
+    <h3 id="certName">[User Name]</h3>
+    <p>has completed the</p>
+    <h3 id="certCourse">[Course Name]</h3>
+    <p>Your score: <span id="certScore">N/A</span></p> <!-- New line to show score -->
+    <p>Earned on <span id="certDate"></span></p>
+    <button id="downloadCertBtn">Download Certificate</button>
+    <button id="closeCertBtn">Close</button>
+  </div>
+</div>
 
-  function saveAvatar(value) {
-    avatarDisplay.textContent = value;
-    // Save to localStorage if you want persistence
-    // localStorage.setItem('selectedAvatar', value);
-  }
+<!-- Load html2canvas properly -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
-  // Initialize avatar display with current select value
-  saveAvatar(avatarSelect.value);
-
-</script>
+<script src="script.js" defer></script> <!-- Your external script -->
 
 </body>
 </html>
