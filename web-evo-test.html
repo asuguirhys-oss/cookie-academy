@@ -112,18 +112,17 @@
         function checkAnswers() {
             const questions = document.querySelectorAll('.question');
             let score = 0;
-
+    
             questions.forEach(q => {
                 const correctAnswer = q.getAttribute('data-answer');
                 const correctText = q.getAttribute('data-answer-text');
                 const selected = q.querySelector('input[type="radio"]:checked');
-
+    
                 q.classList.remove('correct', 'incorrect');
-
-                // Remove old answer text
+    
                 const oldAnswer = q.querySelector('.answer-text');
                 if (oldAnswer) oldAnswer.remove();
-
+    
                 if (selected) {
                     if (selected.value === correctAnswer) {
                         q.classList.add('correct');
@@ -134,17 +133,30 @@
                 } else {
                     q.classList.add('incorrect');
                 }
-
-                // Show correct answer
+    
                 const answerDisplay = document.createElement('div');
                 answerDisplay.classList.add('answer-text');
                 answerDisplay.textContent = `Correct answer: ${correctText}`;
                 q.appendChild(answerDisplay);
             });
-
-            document.getElementById('result').textContent = `You scored ${score} out of ${questions.length}`;
+    
+            const resultText = `You scored ${score} out of ${questions.length}`;
+            document.getElementById('result').textContent = resultText;
+    
+            // ✅ Save under the correct test key
+            localStorage.setItem('score-Web Evolution', `${score}/${questions.length}`);
+    
+            // Optional: prompt for name and redirect
+            let userName = localStorage.getItem('userName');
+            if (!userName) {
+                userName = prompt('Enter your name for the certificate:', 'Web Explorer');
+                if (!userName) userName = 'Web Explorer';
+                localStorage.setItem('userName', userName);
+            }
+    
+            alert(`Test completed! Your score: ${score}/${questions.length}`);
+            window.location.href = 'FIRST.html';
         }
     </script>
 </body>
 </html>
-
