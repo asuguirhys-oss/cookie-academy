@@ -90,3 +90,40 @@ showSection('lessons');
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
 }
+    // Save avatar selection to localStorage and update display
+function saveAvatar(avatar) {
+  localStorage.setItem("cookieAvatar", avatar);
+  document.getElementById("avatar-display").textContent = avatar;
+}
+
+// When page loads, update avatar display and dropdown selection
+window.addEventListener("DOMContentLoaded", () => {
+  // Get saved user name or default
+  const name = localStorage.getItem("userName") || "Cookie Champ";
+  document.getElementById("userNameDisplay").textContent = name;
+
+  // Get saved avatar or default
+  const avatar = localStorage.getItem("cookieAvatar") || "🍪";
+  document.getElementById("avatar-display").textContent = avatar;
+
+  // Set dropdown to saved avatar value
+  const select = document.getElementById("avatar-select");
+  select.value = avatar;
+});
+
+const profileBtn = document.getElementById('profileBtn');
+const dropdown = document.getElementById('profileDropdown');
+
+profileBtn.addEventListener('click', () => {
+  const isExpanded = profileBtn.getAttribute('aria-expanded') === 'true';
+  profileBtn.setAttribute('aria-expanded', !isExpanded);
+  dropdown.hidden = isExpanded;
+});
+
+// Close dropdown if clicking outside
+document.addEventListener('click', (e) => {
+  if (!profileBtn.contains(e.target) && !dropdown.contains(e.target)) {
+    profileBtn.setAttribute('aria-expanded', false);
+    dropdown.hidden = true;
+  }
+});
