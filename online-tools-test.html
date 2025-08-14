@@ -110,40 +110,45 @@
 <div id="result"></div>
 
 <script>
-function checkAnswers() {
-    const questions = document.querySelectorAll('.question');
-    let score = 0;
-
-    questions.forEach(q => {
-        const correctAnswer = q.getAttribute('data-answer');
-        const correctText = q.getAttribute('data-answer-text');
-        const selected = q.querySelector('input[type="radio"]:checked');
-
-        q.classList.remove('correct', 'incorrect');
-
-        const oldAnswer = q.querySelector('.answer-text');
-        if (oldAnswer) oldAnswer.remove();
-
-        if (selected) {
-            if (selected.value === correctAnswer) {
-                q.classList.add('correct');
-                score++;
+    function checkAnswers() {
+        const questions = document.querySelectorAll('.question');
+        let score = 0;
+    
+        questions.forEach(q => {
+            const correctAnswer = q.getAttribute('data-answer');
+            const correctText = q.getAttribute('data-answer-text');
+            const selected = q.querySelector('input[type="radio"]:checked');
+    
+            q.classList.remove('correct', 'incorrect');
+    
+            const oldAnswer = q.querySelector('.answer-text');
+            if (oldAnswer) oldAnswer.remove();
+    
+            if (selected) {
+                if (selected.value === correctAnswer) {
+                    q.classList.add('correct');
+                    score++;
+                } else {
+                    q.classList.add('incorrect');
+                }
             } else {
                 q.classList.add('incorrect');
             }
-        } else {
-            q.classList.add('incorrect');
-        }
-
-        const answerDisplay = document.createElement('div');
-        answerDisplay.classList.add('answer-text');
-        answerDisplay.textContent = `Correct answer: ${correctText}`;
-        q.appendChild(answerDisplay);
-    });
-
-    document.getElementById('result').textContent = `You scored ${score} out of ${questions.length}`;
-}
+    
+            const answerDisplay = document.createElement('div');
+            answerDisplay.classList.add('answer-text');
+            answerDisplay.textContent = `Correct answer: ${correctText}`;
+            q.appendChild(answerDisplay);
+        });
+    
+        const resultText = `You scored ${score} out of ${questions.length}`;
+        document.getElementById('result').textContent = resultText;
+    
+        // ✅ Save score with unique key for this test
+        localStorage.setItem('score-Online Tools', `${score}/${questions.length}`); // <-- this line saves score
+    }
+    </script>
+    
 </script>
 </body>
 </html>
-
