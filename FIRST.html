@@ -7,9 +7,51 @@
 <link rel="stylesheet" href="style.css" />
 <script defer src="script.js"></script>
 <style>
-  /* Your existing styles here... */
-  /* ... */
-
+  header {
+    background:#b55a1f; 
+    color:#fff; 
+    padding:12px 20px; 
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .site-title {
+    max-width: 65%;
+  }
+  .site-title h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  .site-title p {
+    margin: 4px 0 0 0;
+    font-size: 0.9rem;
+  }
+  .top-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #fff;
+    font-weight: 600;
+  }
+  #darkModeToggle {
+    background:none; 
+    border:none; 
+    cursor:pointer; 
+    font-size:1.2rem; 
+    color:#fff;
+  }
+  #avatar-select {
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  #avatar-display {
+    font-size: 1.6rem;
+    margin-left: 8px;
+  }
   /* Modal styling */
   .modal {
     display: none; /* Hidden by default */
@@ -45,14 +87,24 @@
 <body>
 
 <header class="header-container">
-  <div class="header-main">
-    <h1>🍪 <strong>Cookie Academy</strong> 🍪</h1>
-    <p>Learn, bake, and hone your skills — test your knowledge one sweet bite at a time!</p>
-  </div>
-
-  <div class="header-welcome">
-    🌙 Welcome, <strong>Alyssa Denisse M. Pasuquin!</strong> 🎂
-  </div>
+    <div class="header-welcome">
+        🌙 Welcome, <strong id="welcomeName">Guest</strong> 🎂
+      </div>
+      
+      <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const welcomeName = document.getElementById('welcomeName');
+        const storedName = localStorage.getItem('userName');
+      
+        if (storedName && storedName.trim() !== '') {
+          welcomeName.textContent = storedName;
+        } else {
+          welcomeName.textContent = 'Guest';
+        }
+      
+        // Your other existing DOMContentLoaded code below...
+      });
+      </script>
 </header>
 
 <!-- Floating Cookies -->
@@ -77,7 +129,6 @@
     <h3 id="certName">[User Name]</h3>
     <p>has completed the</p>
     <h3 id="certCourse">[Course Name]</h3>
-    <p>Your score: <span id="certScore">N/A</span></p> <!-- New line to show score -->
     <p>Earned on <span id="certDate"></span></p>
     <button id="downloadCertBtn">Download Certificate</button>
     <button id="closeCertBtn">Close</button>
@@ -87,7 +138,43 @@
 <!-- Load html2canvas properly -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
-<script src="script.js" defer></script> <!-- Your external script -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Close button hides modal
+  document.getElementById('closeCertBtn').addEventListener('click', () => {
+    document.getElementById('certificateModal').style.display = 'none';
+  });
+
+  // Download button triggers html2canvas
+  document.getElementById('downloadCertBtn').addEventListener('click', () => {
+    const certificate = document.querySelector('.modal-content.certificate');
+    html2canvas(certificate).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'cookie-certificate.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  });
+
+  // Example: Show modal on page load for testing
+  // Remove/comment this in production
+  //document.getElementById('certificateModal').style.display = 'block';
+
+  // Avatar code (assuming avatar-select exists in your page)
+  const avatarDisplay = document.getElementById('avatar-display');
+  const avatarSelect = document.getElementById('avatar-select');
+
+  function saveAvatar(value) {
+    if(avatarDisplay) avatarDisplay.textContent = value;
+    // localStorage.setItem('selectedAvatar', value);
+  }
+
+  if (avatarSelect) {
+    avatarSelect.addEventListener('change', e => saveAvatar(e.target.value));
+    saveAvatar(avatarSelect.value);
+  }
+});
+</script>
 
 </body>
 </html>
