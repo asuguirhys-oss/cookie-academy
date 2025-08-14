@@ -1,0 +1,259 @@
+body { 
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fff8f0;
+    color: #4b2e19;
+    overflow-x: hidden;
+    animation: fadeInPage 1s ease-in-out;
+}
+
+/* Fade-in animation on page load */
+@keyframes fadeInPage {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 🍪 Background Pattern */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://file.garden/Z6dDZnlsF39IcGo1/cookie.jpg');
+    background-size: 150px;
+    opacity: 0.15;
+    z-index: -2;
+}
+
+/* 🍪 Floating Cookies Animation */
+.cookie {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    background-image: url('https://cookieclicker.wiki.gg/images/thumb/5/5a/PerfectCookie.png/210px-PerfectCookie.png');
+    background-size: cover;
+    animation: floatCookies 20s linear infinite;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+@keyframes floatCookies {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.5; }
+    100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
+}
+
+/* 🌈 Animated Gradient Header */
+header {
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    background: linear-gradient(270deg, #d2691e, #a0522d, #d2691e);
+    background-size: 600% 600%;
+    animation: gradientShift 8s ease infinite;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    background-color: #f4d9b3;
+    padding: 0.5rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+/* 🌟 Glowing Buttons */
+nav button, .card button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background-color: #8b4513;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+nav button:hover, .card button:hover {
+    background-color: #a0522d;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(210,105,30,0.6);
+}
+
+main {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* 🎯 Tilt Card Hover */
+.card {
+    background-color: rgba(255, 245, 225, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 250px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px) rotate(-1deg) scale(1.03);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #f4d9b3;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+.wave-divider {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+.wave-divider svg {
+    display: block;
+    width: 100%;
+    height: 80px;
+}
+
+/* Flip card container */
+.flip-card {
+    perspective: 1000px; /* Enables 3D flip effect */
+}
+
+/* Inner wrapper for front/back */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+/* Flip on hover */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front and back sides */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hides back when not facing viewer */
+    border-radius: 15px;
+}
+
+/* Front styling */
+.flip-card-front {
+    background-color: rgba(255, 245, 225, 0.95);
+}
+
+/* Back styling */
+.flip-card-back {
+    background-color: #f4d9b3;
+    color: #4b2e19;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+.card {
+    width: 250px;
+    height: 350px;
+    perspective: 1000px; /* Needed for 3D flip */
+    margin: 15px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 10px;
+    text-align: center;
+}
+
+.card-front img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#darkModeToggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background-color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 30px;
+    font-size: 18px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 999;
+}
+
+#darkModeToggle:hover {
+    background-color: #f0f0f0;
+}
+
+body.dark-mode {
+    background-color: #2b2b2b;
+    color: #ffffff;
+}
+
+.dark-mode .card {
+    background-color: #3a3a3a;
+    color: #fff;
+    border-color: #555;
+}
+
+.dark-mode .card-back button {
+    background-color: #d2845c;
+    color: #fff;
+}
