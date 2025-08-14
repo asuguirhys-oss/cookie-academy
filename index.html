@@ -74,11 +74,11 @@
         function toggleInput(userType) {
             let studentFields = document.getElementById('studentFields');
             let teacherFields = document.getElementById('teacherFields');
-
+    
             if (userType === 'student') {
                 studentFields.style.display = 'block';
                 teacherFields.style.display = 'none';
-
+    
                 document.getElementById("studentName").required = true;
                 document.getElementById("lrn").required = true;
                 document.getElementById("gradeLevel").required = true;
@@ -88,7 +88,7 @@
             } else {
                 studentFields.style.display = 'none';
                 teacherFields.style.display = 'block';
-
+    
                 document.getElementById("studentName").required = false;
                 document.getElementById("lrn").required = false;
                 document.getElementById("gradeLevel").required = false;
@@ -97,16 +97,16 @@
                 document.getElementById("department").required = true;
             }
         }
-
+    
         async function submitForm(event) {
             event.preventDefault();
-
+    
             let userType = document.querySelector('input[name="userType"]:checked')?.value;
             if (!userType) {
                 alert("Please select user type.");
                 return;
             }
-
+    
             let formData = {
                 userType,
                 name: userType === "student" ? document.getElementById("studentName").value.trim() : document.getElementById("teacherName").value.trim(),
@@ -115,19 +115,23 @@
                 teacherId: userType === "teacher" ? document.getElementById("teacherId").value.trim() : null,
                 department: userType === "teacher" ? document.getElementById("department").value : null,
             };
-
+    
             let firebaseURL = "https://login2-190b9-default-rtdb.firebaseio.com/users.json";
-
+    
             try {
                 let response = await fetch(firebaseURL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(formData),
                 });
-
+    
                 let result = await response.json();
+    
+                // ✅ Save the user name to localStorage
+                localStorage.setItem("userName", formData.name);
+    
                 alert("Data saved successfully!");
-                window.location.href = "FIRST.html";
+                window.location.href = "FIRST.html";  // or index.html, depending on your actual homepage file name
             } catch (error) {
                 console.error("Error:", error);
                 alert("Failed to save data.");
@@ -197,5 +201,4 @@
         </form>
     </div>
 </body>
-
 </html>
